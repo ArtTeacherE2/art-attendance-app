@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Attendance App - Art Room</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: royalblue;
+      color: white;
+      padding: 20px;
+    }
+    h1 {
+      font-family: 'Comic Sans MS', cursive, sans-serif;
+      font-size: 36px;
+      color: #ffdd57;
+      text-shadow: 2px 2px #000;
+    }
+    h2 {
+      color: white;
+    }
+    #students {
+      display: grid;
+      grid-template-columns: repeat(6, 1fr);
+      gap: 10px;
+    }
+    .student {
+      background: white;
+      color: black;
+      padding: 10px;
+      border-radius: 8px;
+      box-shadow: 0 0 5px rgba(0,0,0,0.3);
+      width: 220px;
+    }
+    .status-btn {
+      border: none;
+      color: white;
+      padding: 5px 8px;
+      margin: 2px;
+      border-radius: 5px;
+      font-size: 12px;
+      cursor: pointer;
+    }
+    .present { background-color: green; }
+    .bathroom { background-color: darkorange; }
+    .nurse { background-color: deeppink; }
+    .office { background-color: teal; }
+    .guidance { background-color: purple; }
+    .checkout { background-color: crimson; }
+    .teacher { background-color: navy; }
+    select, button {
+      margin-top: 10px;
+      padding: 5px;
+      font-size: 14px;
+    }
+    .header-buttons {
+      margin-bottom: 20px;
+    }
+  </style>
+  <script>
+    // 🔐 Redirect to login if not authenticated
+    if (localStorage.getItem("loggedIn") !== "true") {
+      window.location.href = "login.html";
+    }
+  </script>
+</head>
+<body>
+  <h1>🎨 Welcome to the Art Room</h1>
+  <h2>Daily Attendance</h2>
+
+  <div class="header-buttons">
+    <label for="periodSelect">Select Class Period:</label>
+    <select id="periodSelect" onchange="loadStudents()">
+      <option value="1st">1st Period</option>
+      <option value="2nd">2nd Period</option>
+      <option value="3rd">3rd Period</option>
+      <option value="4th">4th Period</option>
+      <option value="5th">5th Period</option>
+      <option value="6th">6th Period</option>
+      <option value="7th">7th Period</option>
+      <option value="8th">8th Period</option>
+    </select>
+    <button onclick="loadStudents()">Reload Class</button>
+    <button onclick="downloadLog()">Download Log</button>
+    <button onclick="promptReset()">Reset All (PW)</button>
+    <button onclick="logout()">Logout</button>
+  </div>
+
+  <div id="students"></div>
+  <script src="script.js"></script>
+  <script>
+    function logout() {
+      localStorage.removeItem("loggedIn");
+      window.location.href = "login.html";
+    }
+  </script>
+</body>
+</html>
